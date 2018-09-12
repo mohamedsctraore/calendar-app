@@ -20,6 +20,19 @@ module.exports = function(app) {
     });
   });
 
+  app.post("/calendar", function(req, res) {
+    db.User.findOne({ 
+      where: {
+        username: req.body.username,
+        password: req.body.password
+      }
+    }).then(function(dbUser) {
+      res.render("calendar", {
+        user: dbUser
+      });
+    });
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
