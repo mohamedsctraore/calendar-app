@@ -15,6 +15,19 @@ module.exports = function(app) {
     });
   });
 
+  //Check database for login
+  app.post("/api/login", function(req, res) {
+    db.User.findOne({
+      where: {
+        username: req.body.username,
+        password: req.body.password
+      },
+    }).then(function(dbUser) {
+      console.log(dbUser);
+      res.json(dbUser);
+    });
+  });
+
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
     db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
