@@ -17,10 +17,25 @@
         </form>
         <h3>Examples:</h3>
         <ul id="example-list" class="list-group">
-          {{#each examples}}
+          {{#each User}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
+            {{!-- <a href="example/{{this.id}}">{{this.text}}</a> --}}
+            {{!-- <button class="btn btn-danger float-right delete">ｘ</button> --}}
+            <p>
+              <strong>ID</strong>: {{id}}</p>
+            <p>
+            <p>
+              <strong>Name</strong>: {{username}}</p>
+            <p>
+            <p>
+              <strong>Password</strong>: {{password}}</p>
+            <p>
+            <p>
+              <strong>firstName</strong>: {{firstName}}</p>
+            <p>
+            <p>
+              <strong>lastName</strong>: {{lastName}}</p>
+            <p>
           </li>
           {{/each}}
         </ul>
