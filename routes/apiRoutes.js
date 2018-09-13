@@ -41,6 +41,18 @@ module.exports = function(app) {
     });
   });
 
+  app.post("/api/tasks", function(req, res) {
+    db.User.findOne({
+      include: [db.Task],
+      where: {
+        id: req.body.id
+      },
+    }).then(function(dbUser) {
+      console.log(dbUser);
+      res.json(dbUser);
+    });
+  });
+
   // Delete an example by id
   app.delete("/api/User/:id", function(req, res) {
     db.User.destroy({ where: { id: req.params.id } }).then(function(dbExample) {

@@ -1,10 +1,10 @@
 $(document).ready(function() {
     var usernameInput = $("#username");
     var passwordInput = $("#password");
-    
-    $("loginForm").on("submit", function(){
+    //console.log("hello");
+    $("#loginForm").on("submit", function(){
         event.preventDefault();
-
+        
         var findUser = {
             username: usernameInput
               .val()
@@ -13,11 +13,13 @@ $(document).ready(function() {
               .val()
               .trim()
         };
-
+        console.log(findUser);
         $.post("/api/login", findUser, function(user) {
             //if "user" not empty redirect to /calendar, else display error
-            if(user !== ""){
-                redirectPost("/calendar", user);
+            console.log(user);
+            if(user !== null){
+                sessionStorage.id = user.id;
+                window.location.href = "/calendar";
             }
             else{
                 alert("Incorrect login credentials");

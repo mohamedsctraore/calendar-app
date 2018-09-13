@@ -1,7 +1,11 @@
 module.exports = function(Sequelize, DataTypes) {
   var User = Sequelize.define("User", {
     // Giving the Author model a name of type STRING
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+    id: { 
+      type: DataTypes.INTEGER, 
+      autoIncrement: true, 
+      primaryKey: true 
+    },
     username: {
       type: DataTypes.STRING(50),
       allowNull: false,
