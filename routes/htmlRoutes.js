@@ -16,6 +16,11 @@ module.exports = function(app) {
     //console.log("yay");
     res.sendFile(path.join(__dirname, "../views/layouts/register.html"));
   });
+
+  app.get("/login", function(req, res) {
+    //console.log("yay");
+    res.sendFile(path.join(__dirname, "../views/layouts/login.html"));
+  });
   // Load example page and pass in an example by id
   /*app.get("/example/:id", function(req, res) {
     db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
