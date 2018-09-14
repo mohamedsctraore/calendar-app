@@ -15,9 +15,8 @@ module.exports = function(Sequelize, DataTypes) {
     }
   });
 
-  Task.associate = function(radix_db) {
-
-    Task.belongsTo(radix_db.User, {
+  Task.associate = function(radixDB) {
+    Task.belongsTo(radixDB.User, {
       foreignKey: {
         allowNull: false
       }

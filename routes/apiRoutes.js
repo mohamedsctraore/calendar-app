@@ -34,7 +34,7 @@ module.exports = function(app) {
       where: {
         username: req.body.username,
         password: req.body.password
-      },
+      }
     }).then(function(dbUser) {
       console.log(dbUser);
       res.json(dbUser);
@@ -46,7 +46,7 @@ module.exports = function(app) {
       include: [db.Task],
       where: {
         id: req.body.id
-      },
+      }
     }).then(function(dbUser) {
       console.log(dbUser);
       res.json(dbUser);

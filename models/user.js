@@ -1,10 +1,10 @@
 module.exports = function(Sequelize, DataTypes) {
   var User = Sequelize.define("User", {
     // Giving the Author model a name of type STRING
-    id: { 
-      type: DataTypes.INTEGER, 
-      autoIncrement: true, 
-      primaryKey: true 
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
     },
     username: {
       type: DataTypes.STRING(50),
@@ -12,7 +12,7 @@ module.exports = function(Sequelize, DataTypes) {
       validate: {
         len: {
           args: [1],
-          msg: 'Invalid Username'
+          msg: "Invalid Username"
         }
       }
     },
@@ -22,7 +22,7 @@ module.exports = function(Sequelize, DataTypes) {
       validate: {
         len: {
           args: [1],
-          msg: 'Invalid Password'
+          msg: "Invalid Password"
         }
       }
     },
@@ -32,7 +32,7 @@ module.exports = function(Sequelize, DataTypes) {
       validate: {
         len: {
           args: [1],
-          msg: 'Invalid first name'
+          msg: "Invalid first name"
         }
       }
     },
@@ -42,15 +42,14 @@ module.exports = function(Sequelize, DataTypes) {
       validate: {
         len: {
           args: [1],
-          msg: 'Invalid last name'
+          msg: "Invalid last name"
         }
       }
     }
   });
 
-  User.associate = function(radix_db) {
-
-    User.hasMany(radix_db.Task, {
+  User.associate = function(radixDB) {
+    User.hasMany(radixDB.Task, {
       onDelete: "cascade"
     });
   };
