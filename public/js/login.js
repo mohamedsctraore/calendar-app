@@ -1,9 +1,9 @@
 $(document).ready(function() {
     var usernameInput = $("#username");
     var passwordInput = $("#password");
-    console.log("hello");
+    //console.log("hello");
     $("#loginForm").on("submit", function(){
-        console.log("do this");
+        //console.log("do this");
         event.preventDefault();
         var findUser = {
             username: usernameInput
