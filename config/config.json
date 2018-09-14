@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "radix_db",
+    "database": "radixDB",
     "host": "localhost",
     "port": "3307",
     "dialect": "mysql"
