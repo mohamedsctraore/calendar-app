@@ -1,30 +1,42 @@
 $(document).ready(function() {
     var usernameInput = $("#username");
     var passwordInput = $("#password");
-    //console.log("hello");
-    $("#loginForm").on("submit", function(){
-        //console.log("do this");
+    var confPassInput = $("#rePassword");
+    var fullName = $("#fullName");
+    console.log("hello");
+    $(".regForm").on("submit", function(){
         event.preventDefault();
-        var findUser = {
-            username: usernameInput
-              .val()
-              .trim(),
-            password: passwordInput
-              .val()
-              .trim()
-        };
-        console.log(findUser);
-        $.post("/api/login", findUser, function(user) {
-            //if "user" not empty redirect to /calendar, else display error
-            console.log(user);
-            if(user !== null){
-                sessionStorage.id = user.id;
-                window.location.href = "/calendar";
+
+        var username = usernameInput.val().trim();
+        var password = passwordInput.val().trim();
+        var confPassword = confPassInput.val().trim();
+        //var fullName = fullName.val().trim();
+        //console.log(fullName.val().trim());
+        var firstName = fullName.val().trim().split(/ (.+)/)[0];
+        var lastName = fullName.val().trim().split(/ (.+)/)[1];
+        if(firstName !== ""){
+            if(username !== ""){
+                if(password === confPassword && password !== ""){
+                    var newUser = {
+                        username : username,
+                        password : password,
+                        firstName : firstName,
+                        lastName : lastName
+                    };
+                    //console.log(newUser);
+                    $.post("/api/register", newUser, function() {
+                        window.location.href = "/";
+                    });
+                }else{
+                    alert("Passwords do not match");
+                }
+            }else{
+                alert("Fill in username");
             }
-            else{
-                alert("Incorrect login credentials");
-            }
-            //window.location.href = "/calendar";
-        });
+        }
+        else{
+            alert("Fill in name");
+        }
+
     });
 });

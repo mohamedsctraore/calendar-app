@@ -41,6 +41,7 @@ module.exports = function(app) {
     });
   });
 
+  //retrieve user information and tasks of the user
   app.post("/api/tasks", function(req, res) {
     db.User.findOne({
       include: [db.Task],
@@ -50,6 +51,13 @@ module.exports = function(app) {
     }).then(function(dbUser) {
       console.log(dbUser);
       res.json(dbUser);
+    });
+  });
+  
+  app.post("/api/register", function(req, res) {
+    console.log(req.body);
+    db.User.create(req.body).then(function(dbPost) {
+      res.json(dbPost);
     });
   });
 
