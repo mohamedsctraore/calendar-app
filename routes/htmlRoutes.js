@@ -4,12 +4,17 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     console.log("huh?");
-    res.sendFile(path.join(__dirname, "../public/index.html"));
+    res.sendFile(path.join(__dirname, "../views/layouts/login.html"));
   });
 
   app.get("/calendar", function(req, res) {
     //console.log("yay");
-    res.sendFile(path.join(__dirname, "../public/calendar.html"));
+    res.sendFile(path.join(__dirname, "../views/layouts/main.html"));
+  });
+
+  app.get("/register", function(req, res) {
+    //console.log("yay");
+    res.sendFile(path.join(__dirname, "../views/layouts/register.html"));
   });
   // Load example page and pass in an example by id
   /*app.get("/example/:id", function(req, res) {
