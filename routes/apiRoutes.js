@@ -53,7 +53,6 @@ module.exports = function(app) {
       res.json(dbUser);
     });
   });
-  
   app.post("/api/register", function(req, res) {
     console.log(req.body);
     db.User.create(req.body).then(function(dbPost) {
