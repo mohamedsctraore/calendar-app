@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>My Calendar</title>
+    <!-- local style  -->
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css">
+    <!-- responsive inspection  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <!-- jquery  -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- local js  -->
+    <script type="text/javascript" src="./js/app.js"></script>
+
+    
+</head>
+
+<body>
+    <nav>
+
+        <div class="nav-wrapper blue lighten-3">
+            <a href="#" class="brand-logo center">My Calendar</a>
+
+            <ul class="left hide-on-med-and-down">
+					<li>
+						<a class ="btn-floating btn-large waves-effect waves-light blue"><i class="material-icons">add</i></a>
+					</li>
+
+				</ul>
+        </div>
+    </nav>
+   
+    <div class="container">
+        <div class="row">
+            <div class="col s9 calendar-panes" style="margin-top: 15px; border: 2px solid black; height: 400px">
+                calendar goes here
+            </div>
+            <div class="col s2 calendar-panes" style="margin-top: 15px; margin-left: 2px; border: 2px solid black; height: 400px">
+                    selected day's tasks go here
+                </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
