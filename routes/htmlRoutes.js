@@ -3,18 +3,23 @@ var path = require("path");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    console.log("huh?");
+    //console.log("huh?");
     res.sendFile(path.join(__dirname, "../views/layouts/login.html"));
   });
 
   app.get("/calendar", function(req, res) {
-    //console.log("yay");
+    console.log("yay");
     res.sendFile(path.join(__dirname, "../views/layouts/main.html"));
   });
 
   app.get("/register", function(req, res) {
     //console.log("yay");
     res.sendFile(path.join(__dirname, "../views/layouts/register.html"));
+  });
+
+  app.get("/login", function(req, res) {
+    //console.log("yay");
+    res.sendFile(path.join(__dirname, "../views/layouts/login.html"));
   });
   // Load example page and pass in an example by id
   /*app.get("/example/:id", function(req, res) {

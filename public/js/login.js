@@ -3,8 +3,8 @@ $(document).ready(function() {
     var passwordInput = $("#password");
     //console.log("hello");
     $("#loginForm").on("submit", function(){
+        //console.log("do this");
         event.preventDefault();
-        
         var findUser = {
             username: usernameInput
               .val()
