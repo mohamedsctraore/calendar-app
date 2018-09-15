@@ -15,6 +15,7 @@ $(document).ready(function() {
     var taskIndex = 0;
 
     for (var i = 0 ; i < user.Tasks.length; i++) {
+      
       if (user.Tasks[i].Month == currentMonth) {
         tasksInThisMonth[taskIndex] = {
           taskIndex: taskIndex,
@@ -35,13 +36,13 @@ $(document).ready(function() {
 
     $(".fc-day-top").each(function(){
       var day = parseInt($(this).attr("data-date").slice(8,10));
-      console.log("day is " + day);
+      // console.log("day is " + day);
       var month = parseInt($(this).attr("data-date").slice(5,7))-1;
       for (var i = 0; i < tasksInThisMonth.length; i++) {
         
-      console.log("task day is " + tasksInThisMonth[i].date.getDay());
+      console.log("task day is " + tasksInThisMonth[i].date.getDate());
         // console.log ("wait: "+ tasksInThisMonth[i].date.getMonth());
-        if (tasksInThisMonth[i].date.getDay() == day && tasksInThisMonth[i].date.getMonth() == month) {
+        if (tasksInThisMonth[i].date.getDate() == day && tasksInThisMonth[i].date.getMonth() == month) {
           // console.log ("We found it! " + tasksInThisMonth[i].date.getDay());
           $(this).append(tasksInThisMonth[i].taskTitle);
         }
