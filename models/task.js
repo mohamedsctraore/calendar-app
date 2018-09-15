@@ -12,6 +12,26 @@ module.exports = function(Sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false,
       len: [1]
+    },
+    Year:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      len: [4]
+    },
+    Month:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      len: [1]
+    },
+    Hour:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      len: [1,2]
+    },
+    Minute:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      len: [4]
     }
   });
 
