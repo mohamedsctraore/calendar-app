@@ -5,19 +5,23 @@
 <head>
     <title>My Calendar</title>
     <!-- local style  -->
-    <link rel="stylesheet" type="text/css" href="./styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="../../public/styles/styles.css">
     <!-- responsive inspection  -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- jquery  -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- local js  -->
-    <script type="text/javascript" src="./js/tasks.js"></script>
+    <script type="text/javascript" src="../../public/js/tasks.js"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <link rel='stylesheet' href='../../public/styles/fullcalendar.css' />
+    <script src='../../public/js/jquery.min.js'></script>
+    <script src='../../public/js/moment.min.js'></script>
+    <script src='../../public/js/fullcalendar.js'></script>
+    <script type="text/javascript" src="../../public/js/app.js"></script>
     
 </head>
 
@@ -38,11 +42,11 @@
    
     <div class="container">
         <div class="row">
-            <div class="col s9 calendar-panes" style="margin-top: 15px; border: 2px solid black; height: 400px">
-                calendar goes here
+            <div class="col s9" id="calendar" style="margin-top: 15px;">
+
             </div>
-            <div class="col s2 calendar-panes" style="margin-top: 15px; margin-left: 2px; border: 2px solid black; height: 400px">
-                    selected day's tasks go here
+            <div class="col s2" id="dayAgenda" style="margin-top: 15px; margin-left: 2px;">
+
                 </div>
         </div>
     </div>
