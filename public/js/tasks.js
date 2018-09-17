@@ -1,11 +1,15 @@
-function calendarRefresh(currentMonth){
+function calendarRefresh(currentMonth, currentYear){
   var getUser = {
     id: sessionStorage.id,
   };
 
+  console.log(currentMonth);
+  console.log(currentYear);
+
   $.post("/api/tasks", getUser, function(user) {
     //if "user" not empty redirect to /calendar, else display e rror
-    console.log(user);
+    
+    //console.log(user);
 
     var tasksInThisMonth = [];
     // var currentMonth = moment().month();
@@ -14,7 +18,7 @@ function calendarRefresh(currentMonth){
 
     for (var i = 0 ; i < user.Tasks.length; i++) {
       
-      if (user.Tasks[i].Month == currentMonth) {
+      if (user.Tasks[i].Month == currentMonth && user.Tasks[i].Year == currentYear) {
         tasksInThisMonth[taskIndex] = {
           taskIndex: taskIndex,
           taskTitle: user.Tasks[i].taskTitle,
@@ -25,8 +29,9 @@ function calendarRefresh(currentMonth){
       }
     }
 
-     console.log("Tasks in this month are: ");
-     console.log(tasksInThisMonth);
+    //  console.log("Tasks in this month are: ");
+    //  console.log(tasksInThisMonth);
+    
     // for (var i = 0; i < tasksInThisMonth.length; i++) {
     //    console.log("We have " + tasksInThisMonth.length + " task(s) that is in " + moment(tasksInThisMonth[i].date).format("MMMM"));      
     // }
@@ -49,14 +54,31 @@ function calendarRefresh(currentMonth){
     });
 
     $(".fc-next-button").on("click", function(){
-         currentMonth++;
-         calendarRefresh(currentMonth);
-       });
-      
-       $(".fc-prev-button").on("click", function(){
-         currentMonth--;
-         calendarRefresh(currentMonth);
+         if (currentMonth < 11) {
+            currentMonth++;
+         } else {
+            currentMonth = 0;
+            currentYear++;
+         }
+         calendarRefresh(currentMonth, currentYear);
     });
+      
+    $(".fc-prev-button").on("click", function(){
+         if (currentMonth > 0) {
+          currentMonth--;
+         } else {
+          currentMonth = 11;
+          currentYear--;
+         }
+         calendarRefresh(currentMonth, currentYear);
+    });
+
+    $(".fc-today-button").on("click", function(){
+      currentMonth = moment().month();
+      currentYear = moment().year();
+      calendarRefresh(currentMonth, currentYear);
+    });
+
 
   });
 };
@@ -67,7 +89,8 @@ $(document).ready(function() {
   };
 
   var currentMonth = moment().month();
-  calendarRefresh(currentMonth);
+  var currentYear = moment().year();
+  calendarRefresh(currentMonth, currentYear);
   
   //window.location.href = "/calendar";
   
