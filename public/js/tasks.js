@@ -1,15 +1,15 @@
-$(document).ready(function() {
+function calendarRefresh(currentMonth){
   var getUser = {
     id: sessionStorage.id,
   };
-  //console.log("hello");
+
   $.post("/api/tasks", getUser, function(user) {
-    //if "user" not empty redirect to /calendar, else display error
+    //if "user" not empty redirect to /calendar, else display e rror
     console.log(user);
 
     var tasksInThisMonth = [];
-    var currentMonth = moment().month();
-    console.log ("Current month is " + moment().format("MMMM"));
+    // var currentMonth = moment().month();
+    // console.log ("Current month is " + moment().format("MMMM"));
     var taskIndex = 0;
 
     for (var i = 0 ; i < user.Tasks.length; i++) {
@@ -25,10 +25,11 @@ $(document).ready(function() {
       }
     }
 
-    console.log(tasksInThisMonth);
-    for (var i = 0; i < tasksInThisMonth.length; i++) {
-       console.log("We have " + tasksInThisMonth.length + " task(s) that is in " + moment(tasksInThisMonth[i].date).format("MMMM"));      
-    }
+     console.log("Tasks in this month are: ");
+     console.log(tasksInThisMonth);
+    // for (var i = 0; i < tasksInThisMonth.length; i++) {
+    //    console.log("We have " + tasksInThisMonth.length + " task(s) that is in " + moment(tasksInThisMonth[i].date).format("MMMM"));      
+    // }
 
 
     $(".fc-day-top").each(function(){
@@ -37,19 +38,37 @@ $(document).ready(function() {
       var month = parseInt($(this).attr("data-date").slice(5,7))-1;
       for (var i = 0; i < tasksInThisMonth.length; i++) {
         
-      console.log("task day is " + tasksInThisMonth[i].date.getDate());
+      // console.log("task day is " + tasksInThisMonth[i].date.getDate());
 
         if (tasksInThisMonth[i].date.getDate() == day && tasksInThisMonth[i].date.getMonth() == month) {
 
-          $(this).append(tasksInThisMonth[i].taskTitle);
+          $(this).html("<div style='background-color:lightblue'>" + tasksInThisMonth[i].taskTitle + "</div>");
         }
       }
 
     });
 
-    $('.fc-day-top').click(function() {
-
+    $(".fc-next-button").on("click", function(){
+         currentMonth++;
+         calendarRefresh(currentMonth);
+       });
+      
+       $(".fc-prev-button").on("click", function(){
+         currentMonth--;
+         calendarRefresh(currentMonth);
     });
-    //window.location.href = "/calendar";
+
   });
+};
+
+$(document).ready(function() {
+  var getUser = {
+    id: sessionStorage.id,
+  };
+
+  var currentMonth = moment().month();
+  calendarRefresh(currentMonth);
+  
+  //window.location.href = "/calendar";
+  
 });
