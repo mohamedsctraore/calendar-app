@@ -27,4 +27,10 @@ $(document).ready(function() {
     }
     //window.location.href = "/calendar";
   });
+
+  $('.modal').modal();
+  
+  $('.datepicker').datepicker();
+
+
 });
