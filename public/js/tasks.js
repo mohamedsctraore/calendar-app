@@ -27,4 +27,13 @@ $(document).ready(function() {
     }
     //window.location.href = "/calendar";
   });
+  var inTitle = $("#title");
+  var inDate = $("#date");
+  var inDesc = $("#desc");
+  var inTime = $("#time");
+  $("#taskForm").on("submit", function(){
+    event.preventDefault();
+    var inTitle = $("#title");
+    
+  })
 });
