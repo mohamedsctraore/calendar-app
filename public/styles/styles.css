@@ -47,4 +47,9 @@ a {
 }
 
 
+#modalBox {
+  color: black;
+  max-width: 393;
+  margin: 0 auto;
+}
 
