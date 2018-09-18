@@ -93,5 +93,10 @@ $(document).ready(function() {
   calendarRefresh(currentMonth, currentYear);
   
   //window.location.href = "/calendar";
+  $('.modal').modal();
   
+$('.datepicker').datepicker();
 });
+
+
+
