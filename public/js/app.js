@@ -14,8 +14,5 @@ $('#dayAgenda').fullCalendar({
 });
 
 
-$('.modal').modal();
-$('.datepicker').datepicker();
-  
 
 

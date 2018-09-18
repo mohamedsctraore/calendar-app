@@ -23,6 +23,11 @@ module.exports = function(Sequelize, DataTypes) {
       allowNull: false,
       len: [1]
     },
+    Day: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      len: [1]
+    },
     Hour:{
       type: DataTypes.INTEGER,
       allowNull: false,
