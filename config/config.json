@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
+    "password": "bamazonHW123",
     "database": "radixDB",
     "host": "localhost",
     "dialect": "mysql"

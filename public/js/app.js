@@ -12,4 +12,7 @@ $('#dayAgenda').fullCalendar({
     defaultView: "agenda",
     duration: { days: 1 }
 });
-  
+
+
+
+
