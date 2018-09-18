@@ -2,6 +2,54 @@
   line-height: 2.5;
 }
 
+.nav-wrapper {
+/*background: url(../img/bg-pattern.png),linear-gradient(to left,#3498DB,#FBFCFC);*/
+background: url(../img/bg-pattern.png),linear-gradient(to left,#354e94,#8f94ac);
+  font-family: 'Aclonica', sans-serif;
+}
+
+body {
+/*background: url(../img/bg-pattern.png),linear-gradient(to left,#3498DB,#FBFCFC);*/
+background: url(../img/bg-pattern.png),linear-gradient(to left,#354e94,#8f94ac);
+
+}
+
 .calendar-panes {
   float: left;
 }
+
+#calendar {
+  background-color: #f8f8f8;
+}
+
+#regContainer {
+  max-width: 393px;
+  margin: 0 auto;
+}
+#regForm {
+  display: inline-block; 
+  padding: 32px 48px 0px 48px; 
+  border: 1px solid #EEE;
+}
+
+a {
+  color: #eee;
+}
+
+#loginButton {
+  max-width: auto;
+  margin: 0 auto;
+}
+
+#submitButton {
+  color: #eee;
+  background-color: #5594ed
+}
+
+
+#modalBox {
+  color: black;
+  max-width: 393;
+  margin: 0 auto;
+}
+
