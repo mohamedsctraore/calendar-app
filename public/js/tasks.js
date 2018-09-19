@@ -11,6 +11,7 @@ $(document).ready(function() {
   $.post("/api/tasks", getUser, function(user) {
     var eventsArr = [];
     console.log(user);
+    var dayAgendaDate = moment();
     var tasksInThisMonth = [];
     //console.log ("Current month is " + moment().format("MMMM"));
     var taskIndex = 0;
@@ -22,7 +23,7 @@ $(document).ready(function() {
         end: moment(user.Tasks[i].Year +'-'+ user.Tasks[i].Month+'-'+user.Tasks[i].Day+' '+user.Tasks[i].Hour+':'+user.Tasks[i].Minute,"YYYY-MM-DD hh:mm")
       });
     }
-    renderDayAgenda(moment());
+    renderDayAgenda(dayAgendaDate);
 /*
     for (var i = 0 ; i < user.Tasks.length; i++) {
       
@@ -206,6 +207,8 @@ $(document).ready(function() {
     $('#calendar').fullCalendar({
       dayClick: function(date, jsEvent, view) {
         renderDayAgenda(moment(date));
+        dayAgendaDate = moment(date);
+        //console.log(dayAgendaDate.date());
         //alert('Clicked on: ' + date.format());
     
         //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
@@ -218,6 +221,8 @@ $(document).ready(function() {
       },
       eventClick: function(calEvent, jsEvent, view) {
         renderDayAgenda(moment(calEvent.start));
+        dayAgendaDate = moment(calEvent.start);
+        //console.log(dayAgendaDate.date());
         //alert('Event: ' + calEvent.title);
         //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
         //alert('View: ' + view.name);
@@ -243,7 +248,7 @@ $(document).ready(function() {
       var hourVal = parseInt(timeVal.slice(0,2));
       var minuteVal = parseInt(timeVal.slice(3,6));
       var descriptionVal = $("#textarea1").val();
-      
+      /*
       console.log("user is " + user.username);
       console.log("user ID is " + user.id);
       console.log("task title is " + titleVal);
@@ -251,20 +256,20 @@ $(document).ready(function() {
       console.log("Current year is " + currentYear);
       console.log("Current month is " + currentMonth);
       console.log ("hour is " + hourVal);
-      console.log ("minute is " + minuteVal);
-
+      console.log ("minute is " + minuteVal);*/
+      console.log(dayAgendaDate.date());
       var newTask = {
 
         taskTitle: titleVal,
         taskDescription: descriptionVal,
         UserId: user.id,
-        Year: currentYear,
-        Month: currentMonth,
-        Day: "12",
+        Year: dayAgendaDate.year(),
+        Month: dayAgendaDate.month()+1,
+        Day: dayAgendaDate.date(),
         Hour: hourVal,
         Minute: minuteVal 
       }
-
+      console.log(newTask);
       $.post("/api/Task", newTask, function(user) {
       
         alert("Task added!");
@@ -285,7 +290,6 @@ $(document).ready(function() {
       $('#dayAgenda').fullCalendar('render');
       
     }
-
     
     $('.modal').modal();
   });
