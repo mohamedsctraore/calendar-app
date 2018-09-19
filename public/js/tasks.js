@@ -2,12 +2,16 @@ $(document).ready(function() {
   var getUser = {
     id: sessionStorage.id,
   };
+
+  var currentMonth = moment().month();
+  var currentYear = moment().year();
+
+
+
   $.post("/api/tasks", getUser, function(user) {
     var eventsArr = [];
     console.log(user);
     var tasksInThisMonth = [];
-    var currentMonth = moment().month();
-    var currentYear = moment().year();
     //console.log ("Current month is " + moment().format("MMMM"));
     var taskIndex = 0;
 
@@ -18,6 +22,7 @@ $(document).ready(function() {
         end: moment(user.Tasks[i].Year +'-'+ user.Tasks[i].Month+'-'+user.Tasks[i].Day+' '+user.Tasks[i].Hour+':'+user.Tasks[i].Minute,"YYYY-MM-DD hh:mm")
       });
     }
+    renderDayAgenda(moment());
 /*
     for (var i = 0 ; i < user.Tasks.length; i++) {
       
@@ -200,7 +205,7 @@ $(document).ready(function() {
 
     $('#calendar').fullCalendar({
       dayClick: function(date, jsEvent, view) {
-        getTaskForDay(moment(date));
+        renderDayAgenda(moment(date));
         //alert('Clicked on: ' + date.format());
     
         //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
@@ -212,13 +217,13 @@ $(document).ready(function() {
     
       },
       eventClick: function(calEvent, jsEvent, view) {
-        getTaskForDay(moment(calEvent.start));
+        renderDayAgenda(moment(calEvent.start));
         //alert('Event: ' + calEvent.title);
         //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
         //alert('View: ' + view.name);
     
         // change the border color just for fun
-        $(this).css('border-color', 'red');
+        //$(this).css('border-color', 'red');
     
       },
       events: eventsArr,
@@ -229,91 +234,57 @@ $(document).ready(function() {
     $('#calendar').fullCalendar('render');
 
     // $("#title").val("sup");
-      $("#taskForm").on("submit", function() {
-        event.preventDefault();
-        // console.log($("#time").val());
-        var timeVal = $("#time").val();
-        
-        var titleVal = $("#title").val();
-        var hourVal = parseInt(timeVal.slice(0,2));
-        var minuteVal = parseInt(timeVal.slice(3,6));
-        var descriptionVal = $("#textarea1").val();
-        
-        console.log("user is " + user.username);
-        console.log("user ID is " + user.id);
-        console.log("task title is " + titleVal);
-        console.log("task description " + descriptionVal);
-        console.log("Current year is " + currentYear);
-        console.log("Current month is " + currentMonth);
-        console.log ("hour is " + hourVal);
-        console.log ("minute is " + minuteVal);
+    $("#taskForm").on("submit", function() {
+      event.preventDefault();
+      // console.log($("#time").val());
+      var timeVal = $("#time").val();
+      
+      var titleVal = $("#title").val();
+      var hourVal = parseInt(timeVal.slice(0,2));
+      var minuteVal = parseInt(timeVal.slice(3,6));
+      var descriptionVal = $("#textarea1").val();
+      
+      console.log("user is " + user.username);
+      console.log("user ID is " + user.id);
+      console.log("task title is " + titleVal);
+      console.log("task description " + descriptionVal);
+      console.log("Current year is " + currentYear);
+      console.log("Current month is " + currentMonth);
+      console.log ("hour is " + hourVal);
+      console.log ("minute is " + minuteVal);
 
-        var newTask = {
+      var newTask = {
 
-          taskTitle: titleVal,
-          taskDescription: descriptionVal,
-          UserId: user.id,
-          Year: currentYear,
-          Month: currentMonth,
-          Day: "12",
-          Hour: hourVal,
-          Minute: minuteVal 
-        }
+        taskTitle: titleVal,
+        taskDescription: descriptionVal,
+        UserId: user.id,
+        Year: currentYear,
+        Month: currentMonth,
+        Day: "12",
+        Hour: hourVal,
+        Minute: minuteVal 
+      }
 
-        $.post("/api/Task", newTask, function(user) {
-        
-          alert("Task added!");
-          // window.location.href = "/calendar";
-          location.reload();
-        });
+      $.post("/api/Task", newTask, function(user) {
+      
+        alert("Task added!");
+        // window.location.href = "/calendar";
+        location.reload();
+      });
+    });
+
+    function renderDayAgenda(day){
+      
+      $('#dayAgenda').fullCalendar('destroy');
+      $('#dayAgenda').fullCalendar({
+        events: eventsArr,
+        defaultView : "agendaDay",
+        defaultDate : day
       });
 
-      function getTaskForDay(day){
-        var dayTasks = [];
-        for(var i = 0 ; i < user.Tasks.length; i++){
-          if(day.date() === user.Tasks[i].Day && day.month() === user.Tasks[i].Month-1 && day.year() === user.Tasks[i].Year){
-            dayTasks.push(
-              {
-                title: user.Tasks[i].taskTitle,
-                start: moment(user.Tasks[i].Year +'-'+ user.Tasks[i].Month+'-'+user.Tasks[i].Day+' '+user.Tasks[i].Hour+':'+user.Tasks[i].Minute,"YYYY-MM-DD hh:mm"),
-                end: moment(user.Tasks[i].Year +'-'+ user.Tasks[i].Month+'-'+user.Tasks[i].Day+' '+user.Tasks[i].Hour+':'+user.Tasks[i].Minute,"YYYY-MM-DD hh:mm")
-              }
-            );
-          }
-        }
-        console.log(dayTasks);
-        $('#dayAgenda').fullCalendar('destroy');
-        $('#dayAgenda').fullCalendar({
-          /*dayClick: function(date, jsEvent, view) {
-            getTaskForDay(moment(date));
-            //alert('Clicked on: ' + date.format());
-        
-            //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-        
-            //alert('Current view: ' + view.name);
-            //console.log(date);
-            //alert('Resource: ' + resourceObj);
-
-        
-          },
-          eventClick: function(calEvent, jsEvent, view) {
-            getTaskForDay(moment(calEvent.start));
-            //alert('Event: ' + calEvent.title);
-            //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-            //alert('View: ' + view.name);
-        
-            // change the border color just for fun
-            $(this).css('border-color', 'red');
-        
-          },*/
-          events: dayTasks,
-          defaultView : "agendaDay",
-          defaultDate : day
-        });
-
-        $('#dayAgenda').fullCalendar('render');
-        
-      }
+      $('#dayAgenda').fullCalendar('render');
+      
+    }
 
     
     $('.modal').modal();
