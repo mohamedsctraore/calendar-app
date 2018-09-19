@@ -4,8 +4,6 @@
 
 <head>
     <title>My Calendar</title>
-    <!-- local style  -->
-    <link rel="stylesheet" type="text/css" href="./styles/styles.css">
     <!-- responsive inspection  -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- jquery  -->
@@ -15,6 +13,8 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!-- local style  -->
+     <link rel="stylesheet" type="text/css" href="./styles/styles.css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel='stylesheet' href='./styles/fullcalendar.css' />
@@ -39,7 +39,7 @@
 
                     <!-- Modal Structure -->
                     <div id="modal1" class="modal">
-                        <div class="z-depth-1 grey lighten-4 row" style="border: 1px solid #EEE;">
+                        <div class="z-depth-1 grey lighten-4">
                             <div class="modal-content">
                                 <div class="row">
                                     <form class="col s12">
@@ -64,11 +64,10 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                    <div class='row'>
-                                            <button type='submit' name='btn_login' class='col s12 btn btn-large' id="submitButton">Login</button>
-                                        </div>
-                            </div>
+                            
+
+                                <a class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+
                         </div>
 
                     </div>
