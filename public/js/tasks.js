@@ -8,7 +8,7 @@ $(document).ready(function() {
     var tasksInThisMonth = [];
     var currentMonth = moment().month();
     var currentYear = moment().year();
-    console.log ("Current month is " + moment().format("MMMM"));
+    //console.log ("Current month is " + moment().format("MMMM"));
     var taskIndex = 0;
 
     for (var i = 0 ; i < user.Tasks.length; i++) {
@@ -63,8 +63,8 @@ $(document).ready(function() {
         }
     
 
-        console.log("Current year is " + currentYear);
-        console.log("Current month is " + currentMonth);
+        //console.log("Current year is " + currentYear);
+        //console.log("Current month is " + currentMonth);
     
     
         $(".fc-day-top").each(function(){
@@ -113,8 +113,8 @@ $(document).ready(function() {
         }
     
 
-        console.log("Current year is " + currentYear);
-        console.log("Current month is " + currentMonth);
+        //console.log("Current year is " + currentYear);
+        //console.log("Current month is " + currentMonth);
     
     
         $(".fc-day-top").each(function(){
@@ -136,7 +136,7 @@ $(document).ready(function() {
     });
     
     $(".fc-prev-button").on("click", function(){
-
+      var eventsArr = [];
       $.post("/api/tasks", getUser, function(user) {
 
          if (currentMonth > 0) {
@@ -161,28 +161,61 @@ $(document).ready(function() {
             taskIndex++;
           }
         }
-
-        console.log("Current year is " + currentYear);
-        console.log("Current month is " + currentMonth);
-    
+        
         $(".fc-day-top").each(function(){
           var day = parseInt($(this).attr("data-date").slice(8,10));
     
           var month = parseInt($(this).attr("data-date").slice(5,7))-1;
           for (var i = 0; i < tasksInThisMonth.length; i++) {
             
-
-    
             if (tasksInThisMonth[i].date.getDate() == day && tasksInThisMonth[i].date.getMonth() == month) {
-    
-              $(this).append(tasksInThisMonth[i].taskTitle);
+              //console.log(tasksInThisMonth[i]);
+              //$(this).append(tasksInThisMonth[i].taskTitle);
+              eventsArr.push({
+                title: tasksInThisMonth[i].taskTitle,
+                start: tasksInThisMonth[i].date.getYear()+'-'+ tasksInThisMonth[i].date.getMonth()+'-'+tasksInThisMonth[i].date.getDate(),
+                end: tasksInThisMonth[i].date.getYear()+'-'+ tasksInThisMonth[i].date.getMonth()+'-'+tasksInThisMonth[i].date.getDate()
+              });
             }
           }
-    
         });
+
       });
+      console.log(eventsArr);
+      addToCalendar(eventsArr);
     });
   });
+  function addToCalendar(eventsArr){
+    $('#calendar').fullCalendar({
+      dayClick: function(date, jsEvent, view) {
+    
+        alert('Clicked on: ' + date.format());
+    
+        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+    
+        alert('Current view: ' + view.name);
+        //console.log(date);
+    
+      },
+      events: eventsArr
+    });
+  }
+  
+/*
+  $('#calendar').fullCalendar({
+    events: [
+      {
+        title: 'Event Title1',
+        start: '2018-10-01',
+        end: '2018-10-01'
+      },
+      {
+        title: 'Event Title2',
+        start: '2018-09-17',
+        end: '2018-09-17'
+      }
+    ]
+  });*/
  /* var inTitle = $("#title");
   var inDate = $("#date");
   var inDesc = $("#desc");
