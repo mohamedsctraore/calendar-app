@@ -5,6 +5,7 @@ $(document).ready(function() {
 
   $.post("/api/tasks", getUser, function(user) {
 
+    console.log(user);
     var tasksInThisMonth = [];
     var currentMonth = moment().month();
     var currentYear = moment().year();
@@ -23,6 +24,8 @@ $(document).ready(function() {
         taskIndex++;
       }
     }
+
+    console.log(tasksInThisMonth);
 
     $(".fc-day-top").each(function(){
       var day = parseInt($(this).attr("data-date").slice(8,10));
@@ -130,7 +133,6 @@ $(document).ready(function() {
           }
     
         });
-    
 
       });
     });
@@ -225,5 +227,49 @@ $(document).ready(function() {
     var inTitle = $("#title");
     
   })*/
+
+    console.log("");
+
+    // $("#title").val("sup");
+    $("#taskForm").on("submit", function() {
+       event.preventDefault();
+      // console.log($("#time").val());
+      var timeVal = $("#time").val();
+      
+      var titleVal = $("#title").val();
+      var hourVal = parseInt(timeVal.slice(0,2));
+      var minuteVal = parseInt(timeVal.slice(3,6));
+      var descriptionVal = $("#textarea1").val();
+      
+      console.log("user is " + user.username);
+      console.log("user ID is " + user.id);
+      console.log("task title is " + titleVal);
+      console.log("task description " + descriptionVal);
+      console.log("Current year is " + currentYear);
+      console.log("Current month is " + currentMonth);
+      console.log ("hour is " + hourVal);
+      console.log ("minute is " + minuteVal);
+
+      var newTask = {
+
+        taskTitle: titleVal,
+        taskDescription: descriptionVal,
+        UserId: user.id,
+        Year: currentYear,
+        Month: currentMonth,
+        Day: "25",
+        Hour: hourVal,
+        Minute: minuteVal 
+      }
+
+      $.post("/api/Task", newTask, function(user) {
+      
+        alert("Task added!");
+        // window.location.href = "/calendar";
+        location.reload();
+      });
+    });
+  $('.modal').modal();
+
 });
 
