@@ -3,15 +3,27 @@ $(document).ready(function() {
     id: sessionStorage.id,
   };
 
-  $.post("/api/tasks", getUser, function(user) {
+  var currentMonth = moment().month();
+  var currentYear = moment().year();
 
+
+
+  $.post("/api/tasks", getUser, function(user) {
+    var eventsArr = [];
     console.log(user);
     var tasksInThisMonth = [];
-    var currentMonth = moment().month();
-    var currentYear = moment().year();
-    console.log ("Current month is " + moment().format("MMMM"));
+    //console.log ("Current month is " + moment().format("MMMM"));
     var taskIndex = 0;
 
+    for(var i = 0 ; i < user.Tasks.length; i++){
+      eventsArr.push({
+        title: user.Tasks[i].taskTitle,
+        start: moment(user.Tasks[i].Year +'-'+ user.Tasks[i].Month+'-'+user.Tasks[i].Day+' '+user.Tasks[i].Hour+':'+user.Tasks[i].Minute,"YYYY-MM-DD hh:mm"),
+        end: moment(user.Tasks[i].Year +'-'+ user.Tasks[i].Month+'-'+user.Tasks[i].Day+' '+user.Tasks[i].Hour+':'+user.Tasks[i].Minute,"YYYY-MM-DD hh:mm")
+      });
+    }
+    renderDayAgenda(moment());
+/*
     for (var i = 0 ; i < user.Tasks.length; i++) {
       
       if (user.Tasks[i].Month == currentMonth  && user.Tasks[i].Year == currentYear) {
@@ -25,7 +37,7 @@ $(document).ready(function() {
       }
     }
 
-    console.log(tasksInThisMonth);
+    //console.log(tasksInThisMonth);
 
     $(".fc-day-top").each(function(){
       var day = parseInt($(this).attr("data-date").slice(8,10));
@@ -66,8 +78,8 @@ $(document).ready(function() {
         }
     
 
-        console.log("Current year is " + currentYear);
-        console.log("Current month is " + currentMonth);
+        //console.log("Current year is " + currentYear);
+        //console.log("Current month is " + currentMonth);
     
     
         $(".fc-day-top").each(function(){
@@ -116,8 +128,8 @@ $(document).ready(function() {
         }
     
 
-        console.log("Current year is " + currentYear);
-        console.log("Current month is " + currentMonth);
+        //console.log("Current year is " + currentYear);
+        //console.log("Current month is " + currentMonth);
     
     
         $(".fc-day-top").each(function(){
@@ -138,7 +150,7 @@ $(document).ready(function() {
     });
     
     $(".fc-prev-button").on("click", function(){
-
+      var eventsArr = [];
       $.post("/api/tasks", getUser, function(user) {
 
          if (currentMonth > 0) {
@@ -163,35 +175,67 @@ $(document).ready(function() {
             taskIndex++;
           }
         }
-
-        console.log("Current year is " + currentYear);
-        console.log("Current month is " + currentMonth);
-    
+        
         $(".fc-day-top").each(function(){
           var day = parseInt($(this).attr("data-date").slice(8,10));
     
           var month = parseInt($(this).attr("data-date").slice(5,7))-1;
           for (var i = 0; i < tasksInThisMonth.length; i++) {
             
-
-    
             if (tasksInThisMonth[i].date.getDate() == day && tasksInThisMonth[i].date.getMonth() == month) {
-    
-              $(this).append(tasksInThisMonth[i].taskTitle);
+              //console.log(tasksInThisMonth[i]);
+              //$(this).append(tasksInThisMonth[i].taskTitle);
+              // eventsArr.push({
+              //   title: tasksInThisMonth[i].taskTitle,
+              //   start: tasksInThisMonth[i].date.getYear()+'-'+ tasksInThisMonth[i].date.getMonth()+'-'+tasksInThisMonth[i].date.getDate(),
+              //   end: tasksInThisMonth[i].date.getYear()+'-'+ tasksInThisMonth[i].date.getMonth()+'-'+tasksInThisMonth[i].date.getDate()
+              // });
+              //console.log(eventsArr);
             }
           }
-    
         });
-    
 
       });
+      //console.log(eventsArr);
+      //addToCalendar(eventsArr);
+    });*/
+    console.log(eventsArr);
+    
+    $('#calendar').fullCalendar('destroy');
+
+    $('#calendar').fullCalendar({
+      dayClick: function(date, jsEvent, view) {
+        renderDayAgenda(moment(date));
+        //alert('Clicked on: ' + date.format());
+    
+        //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+    
+        //alert('Current view: ' + view.name);
+        //console.log(date);
+        //alert('Resource: ' + resourceObj);
+
+    
+      },
+      eventClick: function(calEvent, jsEvent, view) {
+        renderDayAgenda(moment(calEvent.start));
+        //alert('Event: ' + calEvent.title);
+        //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+        //alert('View: ' + view.name);
+    
+        // change the border color just for fun
+        //$(this).css('border-color', 'red');
+    
+      },
+      events: eventsArr,
+      displayEventTime : false
+      
     });
 
-    console.log("");
+    $('#calendar').fullCalendar('render');
 
     // $("#title").val("sup");
     $("#taskForm").on("submit", function() {
-       event.preventDefault();
+      event.preventDefault();
       // console.log($("#time").val());
       var timeVal = $("#time").val();
       
@@ -216,7 +260,7 @@ $(document).ready(function() {
         UserId: user.id,
         Year: currentYear,
         Month: currentMonth,
-        Day: "25",
+        Day: "12",
         Hour: hourVal,
         Minute: minuteVal 
       }
@@ -229,11 +273,21 @@ $(document).ready(function() {
       });
     });
 
+    function renderDayAgenda(day){
+      
+      $('#dayAgenda').fullCalendar('destroy');
+      $('#dayAgenda').fullCalendar({
+        events: eventsArr,
+        defaultView : "agendaDay",
+        defaultDate : day
+      });
 
+      $('#dayAgenda').fullCalendar('render');
+      
+    }
 
+    
+    $('.modal').modal();
   });
-  
-  $('.modal').modal();
-
 });
 
