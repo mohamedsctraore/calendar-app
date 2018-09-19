@@ -36,7 +36,7 @@ module.exports = function(app) {
         password: req.body.password
       }
     }).then(function(dbUser) {
-      console.log(dbUser);
+      //console.log(dbUser);
       res.json(dbUser);
     });
   });
@@ -49,16 +49,29 @@ module.exports = function(app) {
         id: req.body.id
       }
     }).then(function(dbUser) {
-      console.log(dbUser);
+      //console.log(dbUser);
       res.json(dbUser);
     });
   });
+
   app.post("/api/register", function(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     db.User.create(req.body).then(function(dbPost) {
       res.json(dbPost);
     });
   });
+
+  //find all the tasks of a day
+  /*app.get("/api/Tasks", function(req, res) {
+    db.User.findAll({
+      include: [db.Task],
+      where: {
+        id: req.body.id
+      }
+    }).then(function(dbExamples) {
+      res.json(dbExamples);
+    });
+  });*/
 
   // Delete an example by id
   app.delete("/api/User/:id", function(req, res) {
