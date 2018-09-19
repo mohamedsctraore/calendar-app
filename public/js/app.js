@@ -1,18 +1,17 @@
 // calendar
 $(function() {
-    
-    $('#calendar').fullCalendar({
-
-    })
-  
+  $("#calendar").fullCalendar({});
 });
 
 // day's agenda
-$('#dayAgenda').fullCalendar({
-    defaultView: "agenda",
-    duration: { days: 1 }
+$(function() {
+  $("#dayAgenda").fullCalendar({
+    defaultView: "agendaDay",
+    duration: { days: 1 },
+    views: {
+      day: {
+        titleFormat: "MMM DD, YYYY"
+      }
+    }
+  });
 });
-
-
-
-
