@@ -199,14 +199,16 @@ $(document).ready(function() {
     $('#calendar').fullCalendar('destroy');
 
     $('#calendar').fullCalendar({
-      dayClick: function(date, jsEvent, view) {
+      dayClick: function(date, jsEvent, view, resourceObj) {
     
         alert('Clicked on: ' + date.format());
     
-        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+        //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
     
-        alert('Current view: ' + view.name);
+        //alert('Current view: ' + view.name);
         //console.log(date);
+        //alert('Resource: ' + resourceObj);
+
     
       },
       eventClick: function(calEvent, jsEvent, view) {
