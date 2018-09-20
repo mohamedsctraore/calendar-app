@@ -33,6 +33,7 @@
             <a href="#" class="brand-logo center">My Calendar</a>
         </div>
     </nav>
+    <main>
     <div class="container">
         <div class="row">
             <div class="col s8" id="calendar" style="margin-top: 15px;">
@@ -47,19 +48,19 @@
                             <form class="col s12" id="taskForm">
                                 <div class="row modal-form-row">
                                     <div class="input-field col s12 l6 20">
-                                        <input id="title" type="text" class="validate">
+                                        <input class="title" type="text" name="title" id="title">
                                         <label for="title">Title</label>
                                     </div>
-                                </div>
+                                </div> 
                                 <div class="row">
                                     <div class='input-field col s12 16 20'>
-                                        <input class='time' type='time' name='time' id='time' />
+                                        <input class='time' type='text' name='time' id='time' />
                                         <label for='time'></label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12 16 20">
-                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                        <textarea id="textarea1" type="text" class="materialize-textarea"></textarea>
                                         <label for="textarea1">Description</label>
                                     </div>
                                 </div>
@@ -73,11 +74,7 @@
             </ul>
         </div>
     </div>
-    <footer>
-        <div class="mui-container mui--text-center">
-            Copyright © 2018
-        </div>
-    </footer>
+    
 </body>
 
 </html>
