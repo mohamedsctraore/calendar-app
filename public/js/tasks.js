@@ -5,7 +5,7 @@ $(document).ready(function() {
 
   var currentMonth = moment().month();
   var currentYear = moment().year();
-  
+  $('.modal').modal();
   
 
 
@@ -292,7 +292,7 @@ $(document).ready(function() {
       
     }
     
-    $('.modal').modal();
+    /*$('.modal').modal();*/
   });
 });
 
