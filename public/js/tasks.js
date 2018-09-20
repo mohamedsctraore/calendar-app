@@ -285,7 +285,8 @@ $(document).ready(function() {
       $('#dayAgenda').fullCalendar({
         events: eventsArr,
         defaultView : "agendaDay",
-        defaultDate : day
+        defaultDate : day,
+        aspectRatio : 0.65
       });
 
       $('#dayAgenda').fullCalendar('render');
