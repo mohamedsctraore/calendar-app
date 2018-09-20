@@ -14,6 +14,7 @@ $(document).ready(function() {
     console.log(user);
     var dayAgendaDate = moment();
     var tasksInThisMonth = [];
+    var deleteTaskTitle = "";
     //console.log ("Current month is " + moment().format("MMMM"));
     var taskIndex = 0;
 
@@ -285,7 +286,12 @@ $(document).ready(function() {
       $('#dayAgenda').fullCalendar({
         events: eventsArr,
         defaultView : "agendaDay",
-        defaultDate : day
+        defaultDate : day,
+        eventClick: function(calEvent, jsEvent, view) {
+          deleteTaskTitle = calEvent.title;
+          console.log(deleteTaskTitle);
+      
+        }
       });
 
       $('#dayAgenda').fullCalendar('render');
