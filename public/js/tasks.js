@@ -20,12 +20,14 @@ $(document).ready(function() {
 
     for(var i = 0 ; i < user.Tasks.length; i++){
       eventsArr.push({
+        id : user.Tasks[i].taskID,
         title: user.Tasks[i].taskTitle,
         start: moment(user.Tasks[i].Year +'-'+ user.Tasks[i].Month+'-'+user.Tasks[i].Day+' '+user.Tasks[i].Hour+':'+user.Tasks[i].Minute,"YYYY-MM-DD hh:mm"),
         end: moment(user.Tasks[i].Year +'-'+ user.Tasks[i].Month+'-'+user.Tasks[i].Day+' '+user.Tasks[i].Hour+':'+user.Tasks[i].Minute,"YYYY-MM-DD hh:mm")
       });
     }
     renderDayAgenda(dayAgendaDate);
+    renderCalendar();
 /*
     for (var i = 0 ; i < user.Tasks.length; i++) {
       
@@ -203,42 +205,25 @@ $(document).ready(function() {
       //addToCalendar(eventsArr);
     });*/
     console.log(eventsArr);
-    
-    $('#calendar').fullCalendar('destroy');
+    function renderCalendar(){
+      $('#calendar').fullCalendar('destroy');
 
-    $('#calendar').fullCalendar({
-      dayClick: function(date, jsEvent, view) {
-        renderDayAgenda(moment(date));
-        dayAgendaDate = moment(date);
-        //console.log(dayAgendaDate.date());
-        //alert('Clicked on: ' + date.format());
-    
-        //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-    
-        //alert('Current view: ' + view.name);
-        //console.log(date);
-        //alert('Resource: ' + resourceObj);
+      $('#calendar').fullCalendar({
+        dayClick: function(date, jsEvent, view) {
+          renderDayAgenda(moment(date));
+          dayAgendaDate = moment(date);
+        },
+        eventClick: function(calEvent, jsEvent, view) {
+          renderDayAgenda(moment(calEvent.start));
+          dayAgendaDate = moment(calEvent.start);
+        },
+        events: eventsArr,
+        displayEventTime : false
+        
+      });
 
-    
-      },
-      eventClick: function(calEvent, jsEvent, view) {
-        renderDayAgenda(moment(calEvent.start));
-        dayAgendaDate = moment(calEvent.start);
-        //console.log(dayAgendaDate.date());
-        //alert('Event: ' + calEvent.title);
-        //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-        //alert('View: ' + view.name);
-    
-        // change the border color just for fun
-        //$(this).css('border-color', 'red');
-    
-      },
-      events: eventsArr,
-      displayEventTime : false
-      
-    });
-
-    $('#calendar').fullCalendar('render');
+      $('#calendar').fullCalendar('render');
+    }
 
     // $("#title").val("sup");
     $("#taskForm").on("submit", function() {
@@ -279,6 +264,17 @@ $(document).ready(function() {
         location.reload();
       });
     });
+    $("#delete").on("click", function(){
+      $.ajax({
+        method: "DELETE",
+        url: "/api/delete/" + deleteTaskTitle
+      })
+        .then(function() {
+          renderDayAgenda(dayAgendaDate);
+          renderCalendar();
+          location.reload();
+        });
+    })
 
     function renderDayAgenda(day){
       
@@ -288,16 +284,17 @@ $(document).ready(function() {
         defaultView : "agendaDay",
         defaultDate : day,
         eventClick: function(calEvent, jsEvent, view) {
-          deleteTaskTitle = calEvent.title;
+          deleteTaskTitle = calEvent.id;
           console.log(deleteTaskTitle);
-      
-        }
+          $('#modal2').modal('open'); 
+        },
+        aspectRatio : 0.65
       });
 
       $('#dayAgenda').fullCalendar('render');
-      
     }
-    
+
+
     $('.modal').modal();
   });
 });

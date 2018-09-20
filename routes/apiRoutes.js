@@ -74,9 +74,10 @@ module.exports = function(app) {
   });*/
 
   // Delete an example by id
-  app.delete("/api/User/:id", function(req, res) {
-    db.User.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
+  app.delete("/api/delete/:id", function(req, res) {
+    console.log("deleted maybe");
+    db.Task.destroy({ where: { taskID: req.params.id } }).then(function(dbPost) {
+      res.json(dbPost);
     });
   });
 };
