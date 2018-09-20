@@ -9,8 +9,16 @@ background: url(../img/bg-pattern.png),linear-gradient(to left,#354e94,#8f94ac);
 
 body {
 background: url(../img/bg-pattern.png),linear-gradient(to left,#354e94,#8f94ac);
+display: flex;
+min-height: 100vh;
+flex-direction: column;
+padding-bottom: 0;
 }
 
+main {
+  flex: 1 0 auto;
+}
+    
 .calendar-panes {
   float: left;
 }
@@ -66,25 +74,26 @@ a.regButton {
   margin-bottom: 80px;
 }
 
-#content-wrapper {
-  min-height: 100%;
-
-  /* sticky footer */
-  box-sizing: border-box;
-  margin-bottom: -100px;
-  padding-bottom: 100px;
+#footer {
+   /* sticky footer */
+  position: relative;
+  bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+   
 }
 
 footer {
-  box-sizing: border-box;
-  height: 40px;
-  background-color: #6b6464;
-  border-top: 1px solid #030303;
-  padding-top: 10px;
-  margin-top: 50px;
-  display: block;
-  text-align: center;
-}
+    box-sizing: border-box;
+    height: 40px;
+    width: 100%;
+    background-color: #6b6464;
+    border-top: 1px solid #030303;
+    padding-top: 10px;
+    margin-top: 50px;
+    display: block;
+    text-align: center;  
+  }
 
 #loginForm {
   display: inline-block;
@@ -110,8 +119,8 @@ div.z-depth-1.grey.lighten-4.row {
 
 .btn, .btn-large {
   text-decoration: none;
-  color: #fff;
-  background-color: #5d5691;
+  color: rgb(43, 33, 104);
+  background-color: #d8e7e5;
   text-align: center;
   letter-spacing: .5px;
   transition: .2s ease-out;
@@ -120,4 +129,5 @@ div.z-depth-1.grey.lighten-4.row {
 
 .btn:hover{
   background-color: #455de2;
+  color: #fff;
 }
