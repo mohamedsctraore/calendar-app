@@ -3,15 +3,12 @@
 }
 
 .nav-wrapper {
-/*background: url(../img/bg-pattern.png),linear-gradient(to left,#3498DB,#FBFCFC);*/
 background: url(../img/bg-pattern.png),linear-gradient(to left,#354e94,#8f94ac);
   font-family: 'Aclonica', sans-serif;
 }
 
 body {
-/*background: url(../img/bg-pattern.png),linear-gradient(to left,#3498DB,#FBFCFC);*/
 background: url(../img/bg-pattern.png),linear-gradient(to left,#354e94,#8f94ac);
-
 }
 
 .calendar-panes {
@@ -30,10 +27,7 @@ background: url(../img/bg-pattern.png),linear-gradient(to left,#354e94,#8f94ac);
   display: inline-block; 
   padding: 32px 48px 0px 48px; 
   border: 1px solid #EEE;
-}
-
-a {
-  color: #eee;
+  background-color: #f8f8f8;
 }
 
 #loginButton {
@@ -43,57 +37,87 @@ a {
 
 #submitButton {
   color: #eee;
-  background-color: #5594ed
+  background-color: #5d5691;
 }
-
 
 #modalBox {
   color: black;
-  max-width: 500px;
+  max-width: 750px;
   margin: 0 auto;
 }
 
-i {
-  position: relative;
+#dayAgenda {
+  background-color: #f5f5f5;
+}
+
+a.regButton {
+  color: white;
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 80px;
+}
+
+.loginButton {
+  color: white;
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 80px;
+}
+
+#content-wrapper {
+  min-height: 100%;
+
+  /* sticky footer */
+  box-sizing: border-box;
+  margin-bottom: -100px;
+  padding-bottom: 100px;
+}
+
+footer {
+  box-sizing: border-box;
+  height: 40px;
+  background-color: #6b6464;
+  border-top: 1px solid #030303;
+  padding-top: 10px;
+  margin-top: 50px;
+  display: block;
+  text-align: center;
+}
+
+#loginForm {
+  display: inline-block;
+  padding: 32px 48px 0px 48px;
+  border: 1px solid #EEE;
+  background-color: #f8f8f8;
+}
+
+div.z-depth-1.grey.lighten-4.row {
+  max-width: 530px;
   margin: 0 auto;
 }
 
-footer.page-footer {
-  background-color: #414247;
+#calendarimg {
+  display: block;
+  text-align: center;
 }
 
-#textarea1 {
-  overflow: auto;
+#icon {
+  display: block;
+  text-align: center;
 }
 
-modal {
-  color: black;
+.btn, .btn-large {
+  text-decoration: none;
+  color: #fff;
+  background-color: #5d5691;
+  text-align: center;
+  letter-spacing: .5px;
+  transition: .2s ease-out;
+  cursor: pointer;
 }
 
-.modal {
-  max-height: 500px;
-}
-
-.modal-form-row {
-  margin-bottom: 0px;
-}
-
-#submitButton {
-  bottom: 0;
-}
-
-.modal .modal-content {
-  padding: 0;
-}
-
-.row {
-margin-bottom: 0;
-}
-
-.z-depth-1.grey.lighten-4 {
-  max-height: 485px;
-}
-
-element.style {
-  color: black;
+.btn:hover{
+  background-color: #455de2;
 }
