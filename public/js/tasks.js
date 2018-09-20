@@ -5,7 +5,8 @@ $(document).ready(function() {
 
   var currentMonth = moment().month();
   var currentYear = moment().year();
-
+  
+  
 
 
   $.post("/api/tasks", getUser, function(user) {
