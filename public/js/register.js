@@ -14,6 +14,9 @@ $(document).ready(function() {
         //console.log(fullName.val().trim());
         var firstName = fullName.val().trim().split(/ (.+)/)[0];
         var lastName = fullName.val().trim().split(/ (.+)/)[1];
+        if(!lastName){
+            lastName = " ";
+        }
         if(firstName !== ""){
             if(username !== ""){
                 if(password === confPassword && password !== ""){
