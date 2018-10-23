@@ -1,7 +1,7 @@
 # My Calendar
 A Personalized Day Planner
 
-![img](https://i.gyazo.com/572d8f621fabd75ae4ae9d75e43a9d0b.png)
+![img](https://i.gyazo.com/a154b9a4762b578b0d4bb3d9017b6e05.png)
 
 This app allows users to log in with their own ID and manage their calendar.
 
