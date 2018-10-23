@@ -1,6 +1,8 @@
 # My Calendar
 A Personalized Day Planner
 
+![img](https://i.gyazo.com/572d8f621fabd75ae4ae9d75e43a9d0b.png)
+
 This app allows users to log in with their own ID and manage their calendar.
 
 Clicking new entry will pop up a modal that allows users to set an appointment on the day and time desired. The application will then display the data in the date selected.
