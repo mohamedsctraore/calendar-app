@@ -10,8 +10,8 @@
     "username": "xrgfroctkylon244",
     "password": "lww2mm841bxm1kok",
     "database": "w51kfztudf0d7mjt",
-    "host": "localhost",
-    "dialect": "qn66usrj1lwdk1cc.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "host": "qn66usrj1lwdk1cc.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql",
     "logging": false
   },
   "production": {
