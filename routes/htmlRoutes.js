@@ -4,7 +4,7 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     //console.log("huh?");
-    res.sendFile(path.join(__dirname, "../views/layouts/login.html"));
+    res.sendFile(path.join(__dirname, "../views/layouts/main.html"));
   });
 
   app.get("/calendar", function(req, res) {
